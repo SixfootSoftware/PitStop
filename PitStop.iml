@@ -2,11 +2,13 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="PitStop">
     <configurations>
-      <configuration name="PitStop" pure-as="true" main-class="PitStop" output-file="PitStop.swf" output-folder="$MODULE_DIR$/out/production/PitStop" use-html-wrapper="true" wrapper-template-path="$MODULE_DIR$/html-template">
+      <configuration name="PitStop" main-class="PitStop" output-file="PitStop.swf" output-folder="$MODULE_DIR$/out">
         <dependencies target-player="11.1">
-          <sdk name="Flex" />
+          <sdk name="flex" />
         </dependencies>
-        <compiler-options />
+        <compiler-options>
+          <option name="additionalOptions" value="-static-link-runtime-shared-libraries=true" />
+        </compiler-options>
         <packaging-air-desktop />
         <packaging-android />
         <packaging-ios />
@@ -16,14 +18,14 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://C:/Flixel/AdamAtomic-flixel-8989e50">
-      <sourceFolder url="file://C:/Flixel/AdamAtomic-flixel-8989e50" isTestSource="false" />
-      <excludeFolder url="file://C:/Flixel/AdamAtomic-flixel-8989e50/docs" />
-    </content>
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Flex" jdkType="Flex SDK Type (new)" />
+    <content url="file://$MODULE_DIR$/../flixel 2.55">
+      <sourceFolder url="file://$MODULE_DIR$/../flixel 2.55" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../flixel 2.55/docs" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

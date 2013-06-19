@@ -7,7 +7,7 @@ public class PlayState extends FlxState {
     }
 
     override public function create():void {
-        add(new FlxSprite);
+        add(new FlxSprite( 320, 240 ));
     }
 }
 }
