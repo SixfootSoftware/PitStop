@@ -52,20 +52,22 @@ import org.flixel.FlxU;
             // Background
             _width = stage.stageWidth/_buffer.scaleX;
             _height = stage.stageHeight/_buffer.scaleY;
-            var colourTransform:ColorTransform = new ColorTransform(0.1, 0.1, 0.1, 1, 157, 158, 140, 0);
             var seed:int = int( Math.random() * int.MAX_VALUE );
-            var backdrop:BitmapData = new BitmapData( _width, _height, false, 0x9D9E8C );
+            var backdrop:BitmapData = new BitmapData( _width, _height, false, 0x9E9F8D );
 
-            var bmd2:BitmapData = new BitmapData( _width, _height, false, 0x9D9E8C );
-            backdrop.noise( seed, 0x8C, 0xA2, BitmapDataChannel.RED, true );
-            backdrop.draw( bmd2, null, null, BlendMode.MULTIPLY, backdrop.rect, false );
-
+            var colouriser:BitmapData = new BitmapData( _width, _height, false, 0x9E9F8D );
+            backdrop.noise( seed, 0x92, 0x9B, BitmapDataChannel.RED, true );
+            backdrop.draw( colouriser, null, null, BlendMode.OVERLAY, backdrop.rect, false );
             _buffer.addChild(new Bitmap( backdrop ));
+
         }
 
         private function setupProgressBar(): void {
             // This shows the bar.
-            _bmpBar = new Bitmap( new BitmapData(1,7,false,0x000000 ));
+            var progressBar:BitmapData = new BitmapData( 1, 7, false, 0x8F9080 );
+            var shadowBar:BitmapData = new BitmapData( 1, 6, false, 0x000000 );
+            progressBar.draw( shadowBar, null, null, BlendMode.NORMAL, shadowBar.rect, false );
+            _bmpBar = new Bitmap( progressBar );
             _bmpBar.x = 4;
             _bmpBar.y = _height-11;
             _buffer.addChild(_bmpBar);
