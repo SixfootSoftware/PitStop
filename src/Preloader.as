@@ -1,5 +1,9 @@
 package {
 
+import flash.display.BitmapDataChannel;
+import flash.display.BlendMode;
+import flash.geom.ColorTransform;
+
 import org.flixel.FlxG;
 import org.flixel.FlxU;
 
@@ -27,7 +31,7 @@ import org.flixel.FlxU;
 
             // This displays the percentage that has been loaded.
             _text = new TextField();
-            _text.defaultTextFormat = new TextFormat("system",8,0xFFFFFF);
+            _text.defaultTextFormat = new TextFormat("system",8,0x000000);
             _text.embedFonts = true;
             _text.selectable = false;
             _text.multiline = false;
@@ -48,12 +52,20 @@ import org.flixel.FlxU;
             // Background
             _width = stage.stageWidth/_buffer.scaleX;
             _height = stage.stageHeight/_buffer.scaleY;
-            _buffer.addChild(new Bitmap(new BitmapData(_width, _height, false, 0x59003A)));
+            var colourTransform:ColorTransform = new ColorTransform(0.1, 0.1, 0.1, 1, 157, 158, 140, 0);
+            var seed:int = int( Math.random() * int.MAX_VALUE );
+            var backdrop:BitmapData = new BitmapData( _width, _height, false, 0x9D9E8C );
+
+            var bmd2:BitmapData = new BitmapData( _width, _height, false, 0x9D9E8C );
+            backdrop.noise( seed, 0x8C, 0xA2, BitmapDataChannel.RED, true );
+            backdrop.draw( bmd2, null, null, BlendMode.MULTIPLY, backdrop.rect, false );
+
+            _buffer.addChild(new Bitmap( backdrop ));
         }
 
         private function setupProgressBar(): void {
             // This shows the bar.
-            _bmpBar = new Bitmap(new BitmapData(1,7,false,0xFFFFFF));
+            _bmpBar = new Bitmap( new BitmapData(1,7,false,0x000000 ));
             _bmpBar.x = 4;
             _bmpBar.y = _height-11;
             _buffer.addChild(_bmpBar);
@@ -67,7 +79,7 @@ import org.flixel.FlxU;
                 _text.setTextFormat(_text.defaultTextFormat);
                 return;
             }
-            _text.text = "Loading: " + FlxU.floor(Percent*100)+"%";
+            _text.text = "Loading " + className + " : " + FlxU.floor(Percent*100)+"%";
             _text.setTextFormat(_text.defaultTextFormat);
         }
     }
