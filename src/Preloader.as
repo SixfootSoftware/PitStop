@@ -44,14 +44,14 @@ import org.flixel.FlxU;
         private function setupBuffer(): void {
             // The buffer, add every graphics on it.
             _buffer = new Sprite();
-            _buffer.width = stage.stageWidth;
-            _buffer.height = stage.stageHeight;
+            _buffer.width = PitStop.GAME_WIDTH;
+            _buffer.height = PitStop.GAME_HEIGHT;
             _buffer.scaleX = 2;
             _buffer.scaleY = 2;
             addChild(_buffer);
             // Background
-            _width = stage.stageWidth/_buffer.scaleX;
-            _height = stage.stageHeight/_buffer.scaleY;
+            _width = PitStop.GAME_WIDTH/_buffer.scaleX;
+            _height = PitStop.GAME_HEIGHT/_buffer.scaleY;
             var seed:int = int( Math.random() * int.MAX_VALUE );
             var backdrop:BitmapData = new BitmapData( _width, _height, false, 0x9E9F8D );
 
