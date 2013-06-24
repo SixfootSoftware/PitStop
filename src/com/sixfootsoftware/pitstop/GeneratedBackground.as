@@ -5,7 +5,9 @@ import flash.display.BitmapData;
 import flash.display.BitmapDataChannel;
 import flash.display.BlendMode;
 
-    public class GeneratedBackground {
+import org.flixel.FlxSprite;
+
+public class GeneratedBackground {
 
         private var backdrop:BitmapData;
 
@@ -23,8 +25,10 @@ import flash.display.BlendMode;
             return new Bitmap( backdrop );
         }
 
-        public function getBitmapData():BitmapData {
-            return backdrop;
+        public function getFlxSprite():FlxSprite {
+            var sprite:FlxSprite = new FlxSprite();
+            sprite.pixels = backdrop;
+            return sprite;
         }
     }
 }
