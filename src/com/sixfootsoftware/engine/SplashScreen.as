@@ -1,5 +1,4 @@
 package com.sixfootsoftware.engine {
-import com.sixfootsoftware.pitstop.*;
 
 import flash.utils.getTimer;
 import org.flixel.FlxGroup;
