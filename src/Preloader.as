@@ -1,8 +1,8 @@
 package {
 
-import flash.display.BitmapDataChannel;
+import com.sixfootsoftware.pitstop.GeneratedBackground;
+
 import flash.display.BlendMode;
-import flash.geom.ColorTransform;
 
 import org.flixel.FlxG;
 import org.flixel.FlxU;
@@ -49,16 +49,12 @@ import org.flixel.FlxU;
             _buffer.scaleX = 2;
             _buffer.scaleY = 2;
             addChild(_buffer);
-            // Background
-            _width = PitStop.GAME_WIDTH/_buffer.scaleX;
-            _height = PitStop.GAME_HEIGHT/_buffer.scaleY;
-            var seed:int = int( Math.random() * int.MAX_VALUE );
-            var backdrop:BitmapData = new BitmapData( _width, _height, false, 0x9E9F8D );
 
-            var colouriser:BitmapData = new BitmapData( _width, _height, false, 0x9E9F8D );
-            backdrop.noise( seed, 0x92, 0x9B, BitmapDataChannel.RED, true );
-            backdrop.draw( colouriser, null, null, BlendMode.OVERLAY, backdrop.rect, false );
-            _buffer.addChild(new Bitmap( backdrop ));
+            _width = PitStop.GAME_WIDTH / _buffer.scaleX;
+            _height = PitStop.GAME_HEIGHT / _buffer.scaleY;
+            // Background
+            var backdrop:GeneratedBackground = new GeneratedBackground( _buffer.scaleX, _buffer.scaleY );
+            _buffer.addChild( backdrop.getBitmap() );
 
         }
 
