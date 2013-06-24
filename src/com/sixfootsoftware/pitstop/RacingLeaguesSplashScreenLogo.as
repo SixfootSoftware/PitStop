@@ -1,4 +1,6 @@
 package com.sixfootsoftware.pitstop {
+import com.sixfootsoftware.engine.SplashScreenLogo;
+
 import org.flixel.FlxSprite;
 public class RacingLeaguesSplashScreenLogo extends SplashScreenLogo {
 

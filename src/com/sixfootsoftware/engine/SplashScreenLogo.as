@@ -1,4 +1,4 @@
-package com.sixfootsoftware.pitstop {
+package com.sixfootsoftware.engine {
     import org.flixel.FlxSprite;
 
     public class SplashScreenLogo implements DoubleLinkedList {

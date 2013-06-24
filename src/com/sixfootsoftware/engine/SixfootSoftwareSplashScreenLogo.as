@@ -1,8 +1,8 @@
-package com.sixfootsoftware.pitstop {
+package com.sixfootsoftware.engine {
 import org.flixel.FlxSprite;
     public class SixfootSoftwareSplashScreenLogo extends SplashScreenLogo {
 
-        [Embed(source = '../../../assets/logo_sfs.png')] private var logoSfs:Class;
+        [Embed(source='../../../assets/logo_sfs.png')] private var logoSfs:Class;
 
         public function SixfootSoftwareSplashScreenLogo() {
             var SixfootSoftwareLogo:FlxSprite = new FlxSprite(PitStop.GAME_X_MIDDLE - ( 373 / 2 ), PitStop.GAME_Y_MIDDLE - ( 120 / 2 ));

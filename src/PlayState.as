@@ -2,8 +2,8 @@ package {
 
 import com.sixfootsoftware.pitstop.GeneratedBackground;
 import com.sixfootsoftware.pitstop.RacingLeaguesSplashScreenLogo;
-import com.sixfootsoftware.pitstop.SixfootSoftwareSplashScreenLogo;
-import com.sixfootsoftware.pitstop.SplashScreen;
+import com.sixfootsoftware.engine.SixfootSoftwareSplashScreenLogo;
+import com.sixfootsoftware.engine.SplashScreen;
 
 import org.flixel.*;
 
