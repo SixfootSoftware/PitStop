@@ -1,5 +1,6 @@
 package {
 
+import com.sixfootsoftware.pitstop.Border;
 import com.sixfootsoftware.pitstop.GeneratedBackground;
 import com.sixfootsoftware.pitstop.RacingLeaguesSplashScreenLogo;
 import com.sixfootsoftware.engine.SixfootSoftwareSplashScreenLogo;
@@ -19,6 +20,8 @@ import org.flixel.*;
             splash.addLogo( new RacingLeaguesSplashScreenLogo() );
             add( backdrop.getFlxSprite() );
             add( splash );
+            //game stuff
+            add( new Border() );
         }
 
     }

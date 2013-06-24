@@ -17,7 +17,7 @@ public class GeneratedBackground {
             var height:int = PitStop.GAME_HEIGHT / yScale;
             backdrop = new BitmapData( width, height, false, 0x9E9F8D );
             var colouriser:BitmapData = new BitmapData( width, height, false, 0x9E9F8D );
-            backdrop.noise( seed, 0x92, 0x9B, BitmapDataChannel.RED, true );
+            backdrop.noise( seed, 0x87, 0x91, BitmapDataChannel.RED, true );
             backdrop.draw( colouriser, null, null, BlendMode.OVERLAY, backdrop.rect, false );
         }
 
