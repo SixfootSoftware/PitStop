@@ -32,6 +32,7 @@ import org.flixel.FlxGroup;
             }
             if ( getTimer() > ( timer + total ) ) {
                 this.kill();
+                this.destroy();
             }
             if ( logo.getNext() && getTimer() > ( logoTimer + logo.getDuration() ) ) {
                 logo.hideLogo();
