@@ -2,16 +2,14 @@ package com.sixfootsoftware.pitstop {
 import com.sixfootsoftware.engine.SplashScreenLogo;
 
 import org.flixel.FlxSprite;
-public class RacingLeaguesSplashScreenLogo extends SplashScreenLogo {
+    public class RacingLeaguesSplashScreenLogo extends SplashScreenLogo {
 
-    [Embed(source = '../../../assets/logo_rl.png')] private var logoRl:Class;
-
-    public function RacingLeaguesSplashScreenLogo() {
-        var RacingLeaguesLogo:FlxSprite = new FlxSprite(PitStop.GAME_X_MIDDLE - ( 451 / 2 ), PitStop.GAME_Y_MIDDLE - ( 162 / 2 ));
-        RacingLeaguesLogo.loadGraphic( logoRl, true, false, 451, 162 );
-        RacingLeaguesLogo.addAnimation( "animate", [1, 0], 4, false );
-        RacingLeaguesLogo.blend = "multiply";
-        super( RacingLeaguesLogo, 6 );
+        public function RacingLeaguesSplashScreenLogo() {
+            var RacingLeaguesLogo:FlxSprite = new FlxSprite(PitStop.GAME_X_MIDDLE - ( 451 / 2 ), PitStop.GAME_Y_MIDDLE - ( 162 / 2 ));
+            RacingLeaguesLogo.loadGraphic( AssetRegistry.RacingLeaguesLogo, true, false, 451, 162 );
+            RacingLeaguesLogo.addAnimation( "animate", [1, 0], 4, false );
+            RacingLeaguesLogo.blend = "multiply";
+            super( RacingLeaguesLogo, 6 );
+        }
     }
-}
 }

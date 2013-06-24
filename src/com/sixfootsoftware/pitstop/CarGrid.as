@@ -22,5 +22,24 @@ import org.flixel.FlxGroup;
                 }
             }
         }
+
+        public function reviveGrid():void {
+            var car:FadedCar = LinkedListBuilder.retrieveFirstItem( backgroundCar ) as FadedCar;
+            while( car.getNext() ) {
+                car.revive();
+            }
+        }
+
+        /**
+         * When going back to the menu we no longer need to show the grid
+         */
+        public function discardGrid():void {
+            var car:FadedCar = LinkedListBuilder.retrieveFirstItem( backgroundCar ) as FadedCar;
+            while( car.getNext() ) {
+                car.kill();
+            }
+        }
+
+
     }
 }

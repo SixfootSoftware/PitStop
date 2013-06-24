@@ -9,6 +9,8 @@ import org.flixel.FlxSprite;
         private var next:Car;
 
         public function Car() {
+            super();
+            this.kill(); //by default have the sprite dead. Revive to use.
         }
 
         public function setNext( item:DoubleLinkedList ):void {
