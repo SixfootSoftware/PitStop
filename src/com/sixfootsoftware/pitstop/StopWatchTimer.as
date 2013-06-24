@@ -13,6 +13,12 @@ import flash.utils.getTimer;
         private var lastUpdated:Number = -1;
 
         public function StopWatchTimer() {
+            resetTimer();
+        }
+
+        public function resetTimer() {
+            remainingSteps = steps;
+            stopTime = 0;
             lastUpdated = getTimer();
         }
 

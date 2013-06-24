@@ -4,7 +4,7 @@ import org.flixel.FlxGroup;
 
     public class CarGrid extends FlxGroup {
 
-        private var backgroundCar:FadedCar;
+        private var carList:Car;
 
         public function CarGrid() {
             buildGrid();
@@ -12,19 +12,23 @@ import org.flixel.FlxGroup;
 
         private function buildGrid():void {
             var x:int, y:int;
-            var car:FadedCar;
+            var car:Car;
             //build faded grid
             for( y = 0; y < 2; y++ ) {
                 for( x = 0; x < 7; x++ ) {
-                    car = new FadedCar();
-                    backgroundCar = LinkedListBuilder.addToLinkedList( backgroundCar, car ) as FadedCar;
+                    car = createCarClass();
+                    carList = LinkedListBuilder.addToLinkedList( carList, car ) as Car;
                     this.add( car );
                 }
             }
         }
 
+        protected function createCarClass():Car {
+            return new FadedCar();
+        }
+
         public function reviveGrid():void {
-            var car:FadedCar = LinkedListBuilder.retrieveFirstItem( backgroundCar ) as FadedCar;
+            var car:Car = LinkedListBuilder.retrieveFirstItem( carList ) as Car;
             while( car.getNext() ) {
                 car.revive();
             }
@@ -34,7 +38,7 @@ import org.flixel.FlxGroup;
          * When going back to the menu we no longer need to show the grid
          */
         public function discardGrid():void {
-            var car:FadedCar = LinkedListBuilder.retrieveFirstItem( backgroundCar ) as FadedCar;
+            var car:Car = LinkedListBuilder.retrieveFirstItem( carList ) as Car;
             while( car.getNext() ) {
                 car.kill();
             }
