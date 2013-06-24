@@ -6,6 +6,7 @@ import flash.utils.getTimer;
     public class StopWatchTimer {
 
         private var step:Number = 10;
+        //noinspection JSFieldCanBeLocal
         private var stepInMilliseconds:Number = step * 1000;
         private var steps:Number = 6;
         private var remainingSteps:Number = steps;
@@ -16,7 +17,7 @@ import flash.utils.getTimer;
             resetTimer();
         }
 
-        public function resetTimer() {
+        public function resetTimer():void {
             remainingSteps = steps;
             stopTime = 0;
             lastUpdated = getTimer();

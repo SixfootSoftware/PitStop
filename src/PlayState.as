@@ -1,10 +1,11 @@
 package {
 
 import com.sixfootsoftware.pitstop.Border;
+import com.sixfootsoftware.pitstop.ComponentRegistry;
+import com.sixfootsoftware.pitstop.ComponentRegistry;
 import com.sixfootsoftware.pitstop.GeneratedBackground;
-import com.sixfootsoftware.pitstop.RacingLeaguesSplashScreenLogo;
-import com.sixfootsoftware.engine.SixfootSoftwareSplashScreenLogo;
-import com.sixfootsoftware.engine.SplashScreen;
+
+import flash.system.System;
 
 import org.flixel.*;
 
@@ -15,13 +16,19 @@ import org.flixel.*;
 
         override public function create():void {
             var backdrop:GeneratedBackground = new GeneratedBackground( 1, 1 );
-            var splash:SplashScreen = new SplashScreen( 12 );
-            splash.addLogo( new SixfootSoftwareSplashScreenLogo() );
-            splash.addLogo( new RacingLeaguesSplashScreenLogo() );
             add( backdrop.getFlxSprite() );
-            add( splash );
+            add( ComponentRegistry.splashScreen );
             //game stuff
+            add( ComponentRegistry.gameOver );
             add( new Border() );
+            FlxG.log( "create" );
+        }
+
+        override public function update():void {
+            if( !ComponentRegistry.gameOver.alive && !ComponentRegistry.splashScreen.alive ) {
+                ComponentRegistry.gameOver.startGame();
+            }
+            super.update();
         }
 
     }
