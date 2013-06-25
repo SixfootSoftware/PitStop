@@ -28,6 +28,9 @@ import org.flixel.*;
             if( !ComponentRegistry.gameOver.alive && !ComponentRegistry.splashScreen.alive ) {
                 ComponentRegistry.gameOver.startGame();
             }
+            if ( ComponentRegistry.gameOver.isGameRunning() ) {
+                ComponentRegistry.stopWatch.updateElapsed();
+            }
             super.update();
         }
 
