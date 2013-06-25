@@ -21,6 +21,9 @@ import org.flixel.*;
             //game stuff
             ComponentRegistry.gameOver.setStopWatch( ComponentRegistry.stopWatch );
             add( ComponentRegistry.gameOver );
+            add( ComponentRegistry.pitstopText );
+            add( ComponentRegistry.scoreText );
+
             add( new Border() );
             FlxG.log( "create" );
         }
@@ -28,6 +31,8 @@ import org.flixel.*;
         override public function update():void {
             if( !ComponentRegistry.gameOver.alive && !ComponentRegistry.splashScreen.alive ) {
                 ComponentRegistry.gameOver.startGame();
+                ComponentRegistry.pitstopText.revive();
+                ComponentRegistry.scoreText.revive();
             }
             if ( ComponentRegistry.gameOver.isGameRunning() ) {
                 ComponentRegistry.stopWatch.updateElapsed();

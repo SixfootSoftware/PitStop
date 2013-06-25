@@ -2,10 +2,12 @@ package com.sixfootsoftware.pitstop {
 import com.sixfootsoftware.engine.SixfootSoftwareSplashScreenLogo;
 import com.sixfootsoftware.engine.SplashScreen;
 
-public class ComponentRegistry {
+    public class ComponentRegistry {
         public static var scoreGenerator:ScoreTextGenerator = new ScoreTextGenerator();
         public static var stopWatch:StopWatchTimer = new StopWatchTimer();
         public static var gameOver:GameOver = new GameOver();
+        public static var pitstopText:PitstopText = new PitstopText();
+        public static var scoreText:ScoreText = new ScoreText();
 
         private static var splash:SplashScreen;
 

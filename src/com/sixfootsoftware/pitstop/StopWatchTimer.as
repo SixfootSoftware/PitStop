@@ -39,9 +39,9 @@ public class StopWatchTimer {
             if ( elapsedTime < stepInMilliseconds ) {
                 return;
             }
-            remainingSteps -= Math.floor( elapsedTime / 10000 );
+            remainingSteps -= Math.floor( elapsedTime / stepInMilliseconds );
             FlxG.log( remainingSteps );
-            lastUpdated += elapsedTime - Math.floor( elapsedTime % 10000 );
+            lastUpdated += elapsedTime - Math.floor( elapsedTime % stepInMilliseconds );
             adjustSteps();
         }
 
