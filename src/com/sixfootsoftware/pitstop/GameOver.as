@@ -15,8 +15,8 @@ import org.flixel.FlxSprite;
         public function GameOver() {
             super( PitStop.GAME_X_MIDDLE - ( 156 / 2 ), 211 );
             this.loadGraphic( AssetRegistry.GameOver, true, false, 156, 22 );
-            this.addAnimation( "gameplaying", [0], 1, false );
-            this.addAnimation( "gameover", [1], 1, false );
+            this.addAnimation( "gameplaying", [1], 1, false );
+            this.addAnimation( "gameover", [0], 1, false );
             this.kill();
         }
 
@@ -28,6 +28,7 @@ import org.flixel.FlxSprite;
         public function startGame(): void {
             FlxG.log( "GameOver->startGame" );
             this.revive();
+            stopWatchTimer.resetTimer();
             this.play( "gameplaying" );
         }
 
@@ -36,6 +37,7 @@ import org.flixel.FlxSprite;
         }
 
         override public function preUpdate():void {
+            super.preUpdate();
             if ( stopWatchTimer.hasTimedOut() ) {
                 stopGame();
             }

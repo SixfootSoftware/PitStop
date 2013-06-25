@@ -19,6 +19,7 @@ import org.flixel.*;
             add( backdrop.getFlxSprite() );
             add( ComponentRegistry.splashScreen );
             //game stuff
+            ComponentRegistry.gameOver.setStopWatch( ComponentRegistry.stopWatch );
             add( ComponentRegistry.gameOver );
             add( new Border() );
             FlxG.log( "create" );

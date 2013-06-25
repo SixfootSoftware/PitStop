@@ -3,7 +3,9 @@ package com.sixfootsoftware.pitstop {
 
 import flash.utils.getTimer;
 
-    public class StopWatchTimer {
+import org.flixel.FlxG;
+
+public class StopWatchTimer {
 
         private var step:Number = 10;
         //noinspection JSFieldCanBeLocal
@@ -33,12 +35,13 @@ import flash.utils.getTimer;
             if ( hasTimedOut() ) {
                 return;
             }
-            var elapsedTime:Number = ( lastUpdated - getTimer() );
+            var elapsedTime:Number = ( getTimer() - lastUpdated );
             if ( elapsedTime < stepInMilliseconds ) {
                 return;
             }
-            remainingSteps -= Math.floor( elapsedTime / 1000 );
-            lastUpdated = elapsedTime - Math.floor( elapsedTime % 1000 );
+            remainingSteps -= Math.floor( elapsedTime / 10000 );
+            FlxG.log( remainingSteps );
+            lastUpdated += elapsedTime - Math.floor( elapsedTime % 10000 );
             adjustSteps();
         }
 
@@ -51,7 +54,7 @@ import flash.utils.getTimer;
         }
 
         public function hasTimedOut():Boolean {
-            return remainingSteps > 0;
+            return remainingSteps <= 0;
         }
     }
 }
