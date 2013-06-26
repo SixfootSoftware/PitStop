@@ -8,7 +8,7 @@ import org.flixel.FlxSprite;
         private var prev:Car;
         private var next:Car;
 
-        public function Car() {
+        public function Car( type:int ) {
             super();
             this.kill(); //by default have the sprite dead. Revive to use.
         }
