@@ -20,9 +20,11 @@ import org.flixel.*;
             add( ComponentRegistry.splashScreen );
             //game stuff
             ComponentRegistry.gameOver.setStopWatch( ComponentRegistry.stopWatch );
+            ComponentRegistry.stopWatchDisplay.setStopWatch( ComponentRegistry.stopWatch );
             add( ComponentRegistry.gameOver );
             add( ComponentRegistry.pitstopText );
             add( ComponentRegistry.scoreText );
+            add( ComponentRegistry.stopWatchDisplay );
 
             add( new Border() );
             FlxG.log( "create" );
@@ -33,6 +35,7 @@ import org.flixel.*;
                 ComponentRegistry.gameOver.startGame();
                 ComponentRegistry.pitstopText.revive();
                 ComponentRegistry.scoreText.revive();
+                ComponentRegistry.stopWatchDisplay.revive();
             }
             if ( ComponentRegistry.gameOver.isGameRunning() ) {
                 ComponentRegistry.stopWatch.updateElapsed();

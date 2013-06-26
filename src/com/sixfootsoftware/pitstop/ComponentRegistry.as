@@ -8,6 +8,7 @@ import com.sixfootsoftware.engine.SplashScreen;
         public static var gameOver:GameOver = new GameOver();
         public static var pitstopText:PitstopText = new PitstopText();
         public static var scoreText:ScoreText = new ScoreText();
+        public static var stopWatchDisplay:StopWatchDisplay = new StopWatchDisplay();
 
         private static var splash:SplashScreen;
 
