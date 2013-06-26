@@ -12,5 +12,7 @@ package com.sixfootsoftware.pitstop {
         public static var ScoreText:Class;
         [Embed(source='../../../assets/stopwatch.png')]
         public static var StopWatch:Class;
+        [Embed(source='../../../assets/pitstop.png')]
+        public static var PitStop:Class;
     }
 }
