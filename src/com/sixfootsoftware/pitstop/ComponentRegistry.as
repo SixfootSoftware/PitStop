@@ -16,7 +16,7 @@ import com.sixfootsoftware.engine.SplashScreen;
             if ( splash ) {
                 return splash;
             }
-            splash = new SplashScreen( 12 )
+            splash = new SplashScreen( 12 );
             splash.addLogo( new SixfootSoftwareSplashScreenLogo() );
             splash.addLogo( new RacingLeaguesSplashScreenLogo() );
             return splash;

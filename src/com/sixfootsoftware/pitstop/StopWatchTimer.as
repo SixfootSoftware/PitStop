@@ -11,17 +11,20 @@ package com.sixfootsoftware.pitstop {
         private var stepInMilliseconds:Number = step * 1000;
         public static const STEPS:Number = 6;
         private var remainingSteps:Number = STEPS;
+        private var earlyRemainingSteps:Number = STEPS;
         private var stopTime:Number = 0;
         private var lastUpdated:Number = -1;
+        private var visualUpdate:Number = -1;
 
         public function StopWatchTimer() {
             resetTimer();
         }
 
         public function resetTimer():void {
-            remainingSteps = STEPS;
+            earlyRemainingSteps = remainingSteps = STEPS;
             stopTime = 0;
             lastUpdated = getTimer();
+            visualUpdate = lastUpdated - 2000;
         }
 
         public function addStopTime(time:Number):void {
@@ -35,12 +38,13 @@ package com.sixfootsoftware.pitstop {
                 return;
             }
             var elapsedTime:Number = ( getTimer() - lastUpdated );
-            if (elapsedTime < stepInMilliseconds) {
-                return;
+            if (elapsedTime >= stepInMilliseconds) {
+                this.tickSteps(elapsedTime);
             }
-            remainingSteps -= Math.floor(elapsedTime / stepInMilliseconds);
-            FlxG.log(remainingSteps);
-            lastUpdated += elapsedTime - Math.floor(elapsedTime % stepInMilliseconds);
+            elapsedTime = ( getTimer() - visualUpdate );
+            if (elapsedTime >= stepInMilliseconds) {
+                this.tickDisplay(elapsedTime);
+            }
             adjustSteps();
         }
 
@@ -56,8 +60,18 @@ package com.sixfootsoftware.pitstop {
             return remainingSteps <= 0;
         }
 
-        public function getRemainingSteps():uint {
-            return remainingSteps;
+        public function getDisplaySteps():uint {
+            return earlyRemainingSteps;
+        }
+
+        private function tickDisplay(elapsedTime:Number):void {
+            earlyRemainingSteps -= Math.floor((elapsedTime) / stepInMilliseconds);
+            visualUpdate += elapsedTime - Math.floor(elapsedTime % stepInMilliseconds);
+        }
+
+        private function tickSteps(elapsedTime:Number):void {
+            remainingSteps -= Math.floor(elapsedTime / stepInMilliseconds);
+            lastUpdated += elapsedTime - Math.floor(elapsedTime % stepInMilliseconds);
         }
     }
 }
