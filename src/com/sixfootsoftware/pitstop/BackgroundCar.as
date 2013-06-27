@@ -4,11 +4,15 @@
  * Time: 21:52
  */
 package com.sixfootsoftware.pitstop {
-    public class BackgroundCar extends Car {
+    import org.flixel.FlxSprite;
+
+    public class BackgroundCar extends FlxSprite {
         public function BackgroundCar() {
-            super();
+            super(0, 289);
+            this.loadGraphic(AssetRegistry.PitStop, true, false, 959, 216);
             this.addAnimation("background", [8], 1, false);
             play("background");
+            kill();
         }
     }
 }

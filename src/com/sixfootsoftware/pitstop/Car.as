@@ -1,24 +1,24 @@
 package com.sixfootsoftware.pitstop {
 
+    import org.flixel.FlxG;
     import org.flixel.FlxSprite;
 
     public class Car extends FlxSprite {
 
-        private var succeeds:Vector.<Car> = new Vector.<Car>();
         private var precedes:Vector.<Car> = new Vector.<Car>();
         private var occupied:Boolean = false;
 
         public function Car() {
             super(0, 289);
             this.loadGraphic(AssetRegistry.PitStop, true, false, 959, 216);
-            this.addAnimation("1", [12], 1, false);
-            this.addAnimation("2", [10], 1, false);
-            this.addAnimation("3", [8], 1, false);
+            this.addAnimation("1", [14], 1, false);
+            this.addAnimation("2", [12], 1, false);
+            this.addAnimation("3", [10], 1, false);
             this.addAnimation("4", [1], 1, false);
-            this.addAnimation("5", [7], 1, false);
-            this.addAnimation("6", [5], 1, false);
-            this.addAnimation("7", [3], 1, false);
-            this.addAnimation("8", [0], 1, false);
+            this.addAnimation("5", [4], 1, false);
+            this.addAnimation("6", [2], 1, false);
+            this.addAnimation("7", [0], 1, false);
+            this.addAnimation("8", [6], 1, false);
             this.kill();
         }
 
@@ -27,13 +27,13 @@ package com.sixfootsoftware.pitstop {
             return this;
         }
 
-        public function addPredecessor(car:Car):Car {
-            succeeds.push(car);
-            return this;
-        }
-
         public function setOccupied(occupied:Boolean):Car {
             this.occupied = occupied;
+            if ( occupied ) {
+                revive();
+            } else {
+                kill();
+            }
             return this;
         }
 
@@ -57,17 +57,24 @@ package com.sixfootsoftware.pitstop {
             return false;
         }
 
-        public function getPredecessors():Vector.<Car> {
-            return succeeds;
+        public function hasNoSuccessors():Boolean {
+            return precedes.length == 0;
         }
 
         override public function preUpdate():void {
-            if (this.alive && !occupied) {
-                kill();
-            } else if (!this.alive && occupied) {
-                revive();
-            }
             super.preUpdate();
+        }
+
+        public function move():void {
+            var seed:int = 0;
+            do {
+                seed = int(Math.random() * precedes.length);
+                if ( !precedes[seed].isOccupied() ) {
+                    precedes[seed].setOccupied(true);
+                    this.setOccupied(false);
+                    break;
+                }
+            } while ( true );
         }
     }
 }

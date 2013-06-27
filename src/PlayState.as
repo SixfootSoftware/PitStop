@@ -27,9 +27,9 @@ package {
             add(ComponentRegistry.scoreText);
             add(ComponentRegistry.stopWatchDisplay);
             add(SpriteRegistry.backgroundCarGrid);
+            add(SpriteRegistry.grid);
 
             add(new Border());
-            FlxG.log("create");
         }
 
         override public function update():void {
@@ -48,6 +48,7 @@ package {
             ComponentRegistry.scoreText.revive();
             ComponentRegistry.stopWatchDisplay.revive();
             SpriteRegistry.backgroundCarGrid.revive();
+            SpriteRegistry.grid.revive();
         }
 
     }
