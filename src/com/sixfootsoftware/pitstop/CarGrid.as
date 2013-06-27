@@ -2,14 +2,12 @@ package com.sixfootsoftware.pitstop {
 
     import com.sixfootsoftware.engine.RefreshTimer;
 
-    import org.flixel.FlxG;
-
     import org.flixel.FlxGroup;
 
     public class CarGrid extends FlxGroup {
 
         private var carList:Vector.<Car> = new Vector.<Car>(8);
-        private var refreshTimer:RefreshTimer = new RefreshTimer(750, 50);
+        private var refreshTimer:RefreshTimer = new RefreshTimer(750, 150);
 
         public function CarGrid() {
             buildGrid();
@@ -43,7 +41,7 @@ package com.sixfootsoftware.pitstop {
 
         private function spawnCar():void {
             if (!carList[0].isOccupied()) {
-                carList[0].setOccupied(int(Math.random() * 60) > 50);
+                carList[0].setOccupied(int(Math.random() * 60) > 40);
             }
         }
 
@@ -67,7 +65,7 @@ package com.sixfootsoftware.pitstop {
 
         override public function preUpdate():void {
             super.preUpdate();
-            if ( alive && refreshTimer.isReadyForUpdate()) {
+            if (alive && refreshTimer.isReadyForUpdate()) {
                 rotateGrid();
                 spawnCar();
             }
