@@ -1,13 +1,12 @@
 package com.sixfootsoftware.pitstop {
-    import com.sixfootsoftware.engine.DoubleLinkedList;
 
     import org.flixel.FlxSprite;
 
-    public class Car extends FlxSprite implements DoubleLinkedList {
+    public class Car extends FlxSprite {
 
-        private var prev:Car;
-        private var next:Car;
-        private var position:int = 1;
+        private var succeeds:Vector.<Car> = new Vector.<Car>();
+        private var precedes:Vector.<Car> = new Vector.<Car>();
+        private var occupied:Boolean = false;
 
         public function Car() {
             super(0, 289);
@@ -23,31 +22,49 @@ package com.sixfootsoftware.pitstop {
             this.kill();
         }
 
-        public function setNext(item:DoubleLinkedList):void {
-            next = item as Car;
-        }
-
-        public function getNext():DoubleLinkedList {
-            return next;
-        }
-
-        public function setPrev(item:DoubleLinkedList):void {
-            prev = item as Car;
-        }
-
-        public function getPrev():DoubleLinkedList {
-            return prev;
-        }
-
-        public function setPosition(position:int):Car {
-            this.position = position;
+        public function addSuccessor(car:Car):Car {
+            precedes.push(car);
             return this;
         }
 
+        public function addPredecessor(car:Car):Car {
+            succeeds.push(car);
+            return this;
+        }
+
+        public function setOccupied(occupied:Boolean):Car {
+            this.occupied = occupied;
+            return this;
+        }
+
+        public function isOccupied():Boolean {
+            return occupied;
+        }
+
+        public function canMove():Boolean {
+            if (!occupied) {
+                return false;
+            }
+            return !successorOccupied();
+        }
+
+        private function successorOccupied():Boolean {
+            for each(var car:Car in precedes) {
+                if (car.isOccupied()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public function getPredecessors():Vector.<Car> {
+            return succeeds;
+        }
+
         override public function preUpdate():void {
-            if (position == 0) {
+            if (this.alive && !occupied) {
                 kill();
-            } else if (!this.alive) {
+            } else if (!this.alive && occupied) {
                 revive();
             }
             super.preUpdate();
