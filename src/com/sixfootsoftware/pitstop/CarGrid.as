@@ -32,6 +32,11 @@ package com.sixfootsoftware.pitstop {
             carList[4].addSuccessor(carList[5]);
             carList[5].addSuccessor(carList[6]);
             carList[6].addSuccessor(carList[7]);
+			carList[6].setPit( true );
+        }
+
+        public function getPitPlacement():Car {
+            return carList[6];
         }
 
         //noinspection JSMethodCanBeStatic
