@@ -28,7 +28,7 @@ package com.sixfootsoftware.pitstop {
 
         public function setOccupied(occupied:Boolean):Car {
             this.occupied = occupied;
-            if ( occupied ) {
+            if (occupied) {
                 revive();
             } else {
                 kill();
@@ -65,15 +65,21 @@ package com.sixfootsoftware.pitstop {
         }
 
         public function move():Boolean {
+            if (precedes[precedes.length - 1].precedes.length > 0 && precedes[precedes.length - 1].precedes[0] is PitCar
+                    && !precedes[precedes.length - 1].precedes[0].isOccupied()) {
+                precedes[precedes.length - 1].setOccupied(true);
+                this.setOccupied(false);
+                return true;
+            }
             var seed:int = 0;
             do {
                 seed = int(Math.random() * precedes.length);
-                if ( !precedes[seed].isOccupied() ) {
+                if (!precedes[seed].isOccupied()) {
                     precedes[seed].setOccupied(true);
                     this.setOccupied(false);
                     break;
                 }
-            } while ( true );
+            } while (true);
             return true;
         }
     }
