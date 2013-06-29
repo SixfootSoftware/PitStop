@@ -19,7 +19,7 @@ package com.sixfootsoftware.pitstop {
             var x:int;
             var car:Car;
             for (x = 0; x < 8; x++) {
-                car = createCarClass();
+                car = createCarClass( x );
                 carList[x] = car;
                 carList[x].play((x + 1).toString());
                 this.add(car);
@@ -32,15 +32,17 @@ package com.sixfootsoftware.pitstop {
             carList[4].addSuccessor(carList[5]);
             carList[5].addSuccessor(carList[6]);
             carList[6].addSuccessor(carList[7]);
-			carList[6].setPit( true );
         }
 
         public function getPitPlacement():Car {
-            return carList[6];
+            return carList[5];
         }
 
         //noinspection JSMethodCanBeStatic
-        private function createCarClass():Car {
+        private function createCarClass( placement:int ):Car {
+            if ( placement == 5 ) {
+                return new PitCar();
+            }
             return new Car();
         }
 

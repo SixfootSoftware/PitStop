@@ -3,7 +3,9 @@ package {
     import com.sixfootsoftware.pitstop.Border;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
+    import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
+    import com.sixfootsoftware.pitstop.PitCar;
     import com.sixfootsoftware.pitstop.SpriteRegistry;
 
     import flash.system.System;
@@ -22,10 +24,12 @@ package {
             //game stuff
             ComponentRegistry.gameOver.setStopWatch(ComponentRegistry.stopWatch);
             ComponentRegistry.stopWatchDisplay.setStopWatch(ComponentRegistry.stopWatch);
+            ComponentRegistry.playerControl.setPitGridCar(SpriteRegistry.grid.getPitPlacement() as PitCar );
             add(ComponentRegistry.gameOver);
             add(ComponentRegistry.pitstopText);
             add(ComponentRegistry.scoreText);
             add(ComponentRegistry.stopWatchDisplay);
+            add(ComponentRegistry.playerControl);
             add(SpriteRegistry.backgroundCarGrid);
             add(SpriteRegistry.grid);
 
@@ -38,6 +42,7 @@ package {
             }
             if (ComponentRegistry.gameOver.isGameRunning()) {
                 ComponentRegistry.stopWatch.updateElapsed();
+                ComponentRegistry.playerControl.checkPlayerPressed();
             }
             super.update();
         }

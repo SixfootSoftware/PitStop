@@ -1,14 +1,11 @@
 package com.sixfootsoftware.pitstop {
 
-    import org.flixel.FlxG;
     import org.flixel.FlxSprite;
 
     public class Car extends FlxSprite {
 
         private var precedes:Vector.<Car> = new Vector.<Car>();
         private var occupied:Boolean = false;
-		private var pitLane:Boolean = false;
-		private var released:Boolean = false;
 
         public function Car() {
             super(0, 289);
@@ -42,23 +39,6 @@ package com.sixfootsoftware.pitstop {
         public function isOccupied():Boolean {
             return occupied;
         }
-		
-		public function setPit( isPit:Boolean ):Car {
-			pitLane = isPit;
-			return this;
-		}
-		
-		public function isPit():Boolean {
-			return pitLane;
-		}
-		
-		private function release():Boolean {
-			released := true;
-		}
-		
-		public function isReleased():Boolean {
-			return released;
-		}		
 
         public function canMove():Boolean {
             if (!occupied) {
@@ -86,9 +66,6 @@ package com.sixfootsoftware.pitstop {
 
         public function move():void {
             var seed:int = 0;
-			if ( pitLane && !released ) {
-				return;
-			}
             do {
                 seed = int(Math.random() * precedes.length);
                 if ( !precedes[seed].isOccupied() ) {
