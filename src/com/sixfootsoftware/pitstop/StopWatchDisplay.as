@@ -13,7 +13,7 @@ package com.sixfootsoftware.pitstop {
 
         public function StopWatchDisplay() {
             super(145, 56);
-            this.loadGraphic(AssetRegistry.StopWatch, true, false, 142, 179);
+            this.loadGraphic(AssetRegistry.StopWatch, true, false, 142, 182);
             this.addAnimation("6", [1], 1, false);
             this.addAnimation("5", [1,7,1,7,1,7,1,7], 4, false);
             this.addAnimation("4", [7,4,7,4,7,4,7,4], 4, false);

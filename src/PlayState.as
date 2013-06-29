@@ -4,6 +4,7 @@ package {
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
+    import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
     import com.sixfootsoftware.pitstop.PitCar;
     import com.sixfootsoftware.pitstop.SpriteRegistry;
@@ -42,7 +43,12 @@ package {
             }
             if (ComponentRegistry.gameOver.isGameRunning()) {
                 ComponentRegistry.stopWatch.updateElapsed();
+                ComponentRegistry.playerControl.displayAppropriateAnimation();
                 ComponentRegistry.playerControl.checkPlayerPressed();
+                if ( ComponentRegistry.stopWatch.hasTimedOut() ) {
+                    stopGame();
+                }
+
             }
             super.update();
         }
@@ -52,8 +58,14 @@ package {
             ComponentRegistry.pitstopText.revive();
             ComponentRegistry.scoreText.revive();
             ComponentRegistry.stopWatchDisplay.revive();
+            ComponentRegistry.playerControl.revive();
             SpriteRegistry.backgroundCarGrid.revive();
             SpriteRegistry.grid.revive();
+        }
+
+        private function stopGame():void {
+            SpriteRegistry.grid.kill();
+            ComponentRegistry.playerControl.kill();
         }
 
     }

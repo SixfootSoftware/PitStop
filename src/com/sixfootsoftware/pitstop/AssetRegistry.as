@@ -14,5 +14,7 @@ package com.sixfootsoftware.pitstop {
         public static var StopWatch:Class;
         [Embed(source='../../../assets/pitstop.png')]
         public static var PitStop:Class;
+        [Embed(source='../../../assets/arrows.png')]
+        public static var Arrows:Class;
     }
 }

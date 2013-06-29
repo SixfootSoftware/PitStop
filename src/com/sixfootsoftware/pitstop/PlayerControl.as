@@ -12,14 +12,40 @@ package com.sixfootsoftware.pitstop {
     public class PlayerControl extends FlxGroup {
 
         private var car:PitCar;
+        private var leftArrowDisplay:LeftArrowDisplay = new LeftArrowDisplay();
+        private var rightArrowDisplay:RightArrowDisplay = new RightArrowDisplay();
 
         public function PlayerControl() {
-            //setup loosenWheelButton
-            //setup tightenWheelButton
+            add( leftArrowDisplay );
+            add( rightArrowDisplay );
+            kill();
         }
 
         public function setPitGridCar(car:PitCar):void {
             this.car = car;
+        }
+
+        public function displayAppropriateAnimation():void {
+            if (this.car.isOccupied()) {
+                if (this.car.isWheelDone() && ( this.leftArrowDisplay.playingAnimation || this.rightArrowDisplay.playingAnimation )) {
+                    leftArrowDisplay.playingAnimation = false;
+                    rightArrowDisplay.playingAnimation = false;
+                } else {
+                    if (!this.car.isWheelOff() && !this.leftArrowDisplay.playingAnimation) {
+                        this.leftArrowDisplay.playingAnimation = true;
+                        this.rightArrowDisplay.playingAnimation = false;
+                    }
+                    if (!this.car.isWheelOn() && this.car.isWheelOff() && !this.rightArrowDisplay.playingAnimation) {
+                        this.leftArrowDisplay.playingAnimation = false;
+                        this.rightArrowDisplay.playingAnimation = true;
+                    }
+                }
+            }
+        }
+
+        override public function revive():void {
+            callAll("revive");
+            super.revive();
         }
 
         public function checkPlayerPressed():void {
@@ -29,7 +55,7 @@ package com.sixfootsoftware.pitstop {
                     && !this.car.isWheelOn()
                     && isTightenWheelPressed()) {
                 this.car.tightenWheel();
-            } else if (this.car.isWheelDone() ) {
+            } else if (this.car.isWheelDone()) {
                 this.car.release();
             }
         }
