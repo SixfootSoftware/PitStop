@@ -51,30 +51,35 @@ package com.sixfootsoftware.pitstop {
         }
 
         public function checkPlayerPressed():void {
-            if (!this.car.isWheelOff() && isLoosenWheelPressed()) {
-                this.car.loosenWheel();
-            } else if (this.car.isWheelOff()
-                    && !this.car.isWheelOn()
-                    && isTightenWheelPressed()) {
-                this.car.tightenWheel();
-            } else if (this.car.isWheelDone()) {
-                this.car.release();
+            if (this.car.isOccupied()) {
+                if (!car.isWheelOff() && isLoosenWheelPressed()) {
+                    car.loosenWheel();
+                } else if (car.isWheelOff()
+                        && !car.isWheelOn()
+                        && isTightenWheelPressed()) {
+                    car.tightenWheel();
+                } else if (car.isWheelDone()) {
+                    car.release();
+                }
             }
         }
 
         private function isLoosenWheelPressed():Boolean {
-            return FlxG.keys.justReleased("LEFT") || isArrowClicked( leftArrowDisplay );
+            return FlxG.keys.justReleased("LEFT") || isArrowClicked(leftArrowDisplay);
         }
 
 
-        private function isArrowClicked( arrow:ArrowDisplay ):Boolean {
+        private function isArrowClicked(arrow:ArrowDisplay):Boolean {
             return arrow.overlapsPoint(point.make(FlxG.mouse.x, FlxG.mouse.y))
                     && FlxG.mouse.justReleased();
         }
 
         private function isTightenWheelPressed():Boolean {
-            return FlxG.keys.justReleased("RIGHT") || isArrowClicked( rightArrowDisplay );
+            return FlxG.keys.justReleased("RIGHT") || isArrowClicked(rightArrowDisplay);
         }
 
+        public function stop():void {
+            leftArrowDisplay.playingAnimation = rightArrowDisplay.playingAnimation = alive = false;
+        }
     }
 }
