@@ -68,12 +68,12 @@ package com.sixfootsoftware.pitstop {
             released = true;
         }
 
-        override public function move():void {
+        override public function move():Boolean {
             if ( !released ) {
-                return;
+                return false;
             }
             resetPitStop();
-            super.move();
+            return super.move();
         }
     }
 }

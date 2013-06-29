@@ -65,7 +65,7 @@ package {
 
         private function stopGame():void {
             SpriteRegistry.grid.kill();
-            ComponentRegistry.playerControl.kill();
+            ComponentRegistry.playerControl.alive = false;
         }
 
     }

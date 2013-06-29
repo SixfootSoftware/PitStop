@@ -64,7 +64,7 @@ package com.sixfootsoftware.pitstop {
             super.preUpdate();
         }
 
-        public function move():void {
+        public function move():Boolean {
             var seed:int = 0;
             do {
                 seed = int(Math.random() * precedes.length);
@@ -74,6 +74,7 @@ package com.sixfootsoftware.pitstop {
                     break;
                 }
             } while ( true );
+            return true;
         }
     }
 }

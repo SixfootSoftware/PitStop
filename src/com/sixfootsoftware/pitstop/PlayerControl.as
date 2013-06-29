@@ -8,16 +8,18 @@
 package com.sixfootsoftware.pitstop {
     import org.flixel.FlxG;
     import org.flixel.FlxGroup;
+    import org.flixel.FlxPoint;
 
     public class PlayerControl extends FlxGroup {
 
         private var car:PitCar;
         private var leftArrowDisplay:LeftArrowDisplay = new LeftArrowDisplay();
         private var rightArrowDisplay:RightArrowDisplay = new RightArrowDisplay();
+        private var point:FlxPoint = new FlxPoint();
 
         public function PlayerControl() {
-            add( leftArrowDisplay );
-            add( rightArrowDisplay );
+            add(leftArrowDisplay);
+            add(rightArrowDisplay);
             kill();
         }
 
@@ -61,11 +63,18 @@ package com.sixfootsoftware.pitstop {
         }
 
         private function isLoosenWheelPressed():Boolean {
-            return FlxG.keys.justReleased("LEFT");
+            return FlxG.keys.justReleased("LEFT") || isArrowClicked( leftArrowDisplay );
+        }
+
+
+        private function isArrowClicked( arrow:ArrowDisplay ):Boolean {
+            return arrow.overlapsPoint(point.make(FlxG.mouse.x, FlxG.mouse.y))
+                    && FlxG.mouse.justReleased();
         }
 
         private function isTightenWheelPressed():Boolean {
-            return FlxG.keys.justReleased("RIGHT");
+            return FlxG.keys.justReleased("RIGHT") || isArrowClicked( rightArrowDisplay );
         }
+
     }
 }

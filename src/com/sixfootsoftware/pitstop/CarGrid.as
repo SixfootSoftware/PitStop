@@ -2,16 +2,21 @@ package com.sixfootsoftware.pitstop {
 
     import com.sixfootsoftware.engine.RefreshTimer;
 
+    import org.flixel.FlxG;
+
     import org.flixel.FlxGroup;
+    import org.flixel.FlxSound;
 
     public class CarGrid extends FlxGroup {
 
         private var carList:Vector.<Car> = new Vector.<Car>(8);
         private var refreshTimer:RefreshTimer = new RefreshTimer(750, 150);
+        private var sound:FlxSound = new FlxSound();
 
         public function CarGrid() {
             buildGrid();
             refreshTimer.refreshDecay(50, 10);
+            sound.loadEmbedded( AssetRegistry.SoundBleep, false, false );
             kill();
         }
 
@@ -46,35 +51,44 @@ package com.sixfootsoftware.pitstop {
             return new Car();
         }
 
-        private function spawnCar():void {
+        private function spawnCar():Boolean {
             if (!carList[0].isOccupied()) {
                 carList[0].setOccupied(int(Math.random() * 60) > 40);
+                return carList[0].isOccupied();
             }
+            return false;
         }
 
-        private function rotateGrid():void {
+        private function rotateGrid():Boolean {
             var car:Car;
             var i:int = 7;
+            var carMoved:Boolean = false;
             while (i >= 0) {
                 car = carList[i];
                 if (car.isOccupied()) {
                     if (car.hasNoSuccessors()) {
                         car.setOccupied(false);
+                        carMoved = true;
                     } else {
-                        if (car.canMove()) {
-                            car.move();
+                        if (car.canMove() && car.move()) {
+                            carMoved = true;
                         }
                     }
                 }
                 i--;
             }
+            if ( carMoved ) {
+                    return true;
+            }
+            return false;
         }
 
         override public function preUpdate():void {
             super.preUpdate();
             if (alive && refreshTimer.isReadyForUpdate()) {
-                rotateGrid();
-                spawnCar();
+                if ( rotateGrid() || spawnCar() ) {
+                    sound.play();
+                }
             }
         }
 

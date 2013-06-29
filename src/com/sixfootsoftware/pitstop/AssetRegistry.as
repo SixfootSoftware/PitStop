@@ -16,5 +16,7 @@ package com.sixfootsoftware.pitstop {
         public static var PitStop:Class;
         [Embed(source='../../../assets/arrows.png')]
         public static var Arrows:Class;
+        [Embed(source="../../../assets/BleepBlopLo.mp3")]
+        public static var SoundBleep:Class;
     }
 }
