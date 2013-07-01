@@ -29,6 +29,8 @@ package {
             add(ComponentRegistry.gameOver);
             add(ComponentRegistry.pitstopText);
             add(ComponentRegistry.scoreText);
+            add(ComponentRegistry.scoreTextGenerator);
+            add(ComponentRegistry.pitstopTextGenerator);
             add(ComponentRegistry.stopWatchDisplay);
             add(ComponentRegistry.playerControl);
             add(SpriteRegistry.backgroundCarGrid);
@@ -57,6 +59,8 @@ package {
             ComponentRegistry.gameOver.startGame();
             ComponentRegistry.pitstopText.revive();
             ComponentRegistry.scoreText.revive();
+            ComponentRegistry.scoreTextGenerator.revive();
+            ComponentRegistry.pitstopTextGenerator.revive();
             ComponentRegistry.stopWatchDisplay.revive();
             ComponentRegistry.playerControl.revive();
             SpriteRegistry.backgroundCarGrid.revive();
