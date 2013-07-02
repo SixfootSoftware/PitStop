@@ -9,7 +9,7 @@ import org.flixel.FlxSprite;
             RacingLeaguesLogo.loadGraphic( AssetRegistry.RacingLeaguesLogo, true, false, 451, 162 );
             RacingLeaguesLogo.addAnimation( "animate", [1, 0], 8, false );
             RacingLeaguesLogo.blend = "multiply";
-            super( RacingLeaguesLogo, 6 );
+            super( RacingLeaguesLogo, 3 );
         }
     }
 }
