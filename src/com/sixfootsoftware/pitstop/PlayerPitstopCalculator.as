@@ -2,7 +2,7 @@
 package com.sixfootsoftware.pitstop {
     public class PlayerPitstopCalculator {
 	
-		private const PITSTOP_MULTIPLIER = 100;
+		private const PITSTOP_MULTIPLIER:uint = 100;
         private var pitstop:Number = 0;
 
         public function calculatePitstop( elapsed:Number ):void {

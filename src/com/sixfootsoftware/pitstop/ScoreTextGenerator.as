@@ -8,6 +8,7 @@ package com.sixfootsoftware.pitstop {
 
         private var font:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
         private var bgFont:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
+        private var calculator:PlayerScoreCalculator;
 
         public function ScoreTextGenerator() {
             font.align = bgFont.align = BitmapFont.ALIGN_RIGHT;
@@ -17,6 +18,10 @@ package com.sixfootsoftware.pitstop {
             add( bgFont );
             add( font );
             kill();
+        }
+
+        public function setScoreCalculator( scoreCalculator:PlayerScoreCalculator ):void {
+            calculator = scoreCalculator;
         }
 
         public function updateScore( score:String ):void {

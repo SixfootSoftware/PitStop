@@ -10,6 +10,7 @@ package com.sixfootsoftware.pitstop {
         private var font:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
         private var bgFont:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
         private var dot:FlxSprite = new FlxSprite( 531, 152, AssetRegistry.dot );
+        private var calculator:PlayerPitstopCalculator;
 
         public function PitstopTextGenerator() {
             font.align = bgFont.align = BitmapFont.ALIGN_RIGHT;
@@ -20,6 +21,10 @@ package com.sixfootsoftware.pitstop {
             add( font );
             add( dot );
             kill();
+        }
+
+        public function setPitstopCalculator( pitstopCalculator:PlayerPitstopCalculator ):void {
+            calculator = pitstopCalculator;
         }
 
         public function updatePitTime( time:String ):void {
