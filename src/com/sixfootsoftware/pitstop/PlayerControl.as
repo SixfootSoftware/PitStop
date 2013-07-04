@@ -6,6 +6,8 @@
  * To change this template use File | Settings | File Templates.
  */
 package com.sixfootsoftware.pitstop {
+    import flash.utils.getTimer;
+
     import org.flixel.FlxG;
     import org.flixel.FlxGroup;
     import org.flixel.FlxPoint;
@@ -16,6 +18,10 @@ package com.sixfootsoftware.pitstop {
         private var leftArrowDisplay:LeftArrowDisplay = new LeftArrowDisplay();
         private var rightArrowDisplay:RightArrowDisplay = new RightArrowDisplay();
         private var point:FlxPoint = new FlxPoint();
+        private var pitStart:Number;
+        private var pitStarted:Boolean = false;
+        private var elapsed:Number;
+        private var timer:Number;
 
         public function PlayerControl() {
             add(leftArrowDisplay);
@@ -52,6 +58,7 @@ package com.sixfootsoftware.pitstop {
 
         public function checkPlayerPressed():void {
             if (this.car.isOccupied()) {
+                timePitEvent();
                 if (!car.isWheelOff() && isLoosenWheelPressed()) {
                     car.loosenWheel();
                 } else if (car.isWheelOff()
@@ -59,9 +66,27 @@ package com.sixfootsoftware.pitstop {
                         && isTightenWheelPressed()) {
                     car.tightenWheel();
                 } else if (car.isWheelDone()) {
-                    car.release();
+                    release();
                 }
+                calculatePitstop( elapsed );
             }
+        }
+
+        private function timePitEvent():void {
+            timer = getTimer();
+            if (!pitStarted) {
+                pitStarted = true;
+                pitStart = timer;
+            } else {
+                elapsed = timer - pitStart;
+            }
+        }
+
+        private function release():void {
+            pitStarted = false;
+            calculateScore(elapsed);
+            elapsed = 0;
+            car.release();
         }
 
         private function isLoosenWheelPressed():Boolean {
@@ -80,6 +105,14 @@ package com.sixfootsoftware.pitstop {
 
         public function stop():void {
             leftArrowDisplay.playingAnimation = rightArrowDisplay.playingAnimation = alive = false;
+        }
+
+        private function calculatePitstop( pitstop:Number ):void {
+            ComponentRegistry.pitstopCalculator.calculatePitstop( pitstop );
+        }
+
+        private function calculateScore( score:Number ):void {
+                ComponentRegistry.scoreCalculator.addScore( score );
         }
     }
 }

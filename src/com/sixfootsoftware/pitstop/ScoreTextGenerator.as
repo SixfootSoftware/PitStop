@@ -4,7 +4,7 @@ package com.sixfootsoftware.pitstop {
 
     import org.flixel.FlxGroup;
 
-    public class ScoreTextGenerator extends FlxGroup {
+    public class ScoreTextGenerator extends FlxGroup implements Generator {
 
         private var font:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
         private var bgFont:BitmapFont = new BitmapFont( AssetRegistry.font, 32, 66, BitmapFont.TEXT_SET1, 6 );
@@ -24,13 +24,19 @@ package com.sixfootsoftware.pitstop {
             calculator = scoreCalculator;
         }
 
-        public function updateScore( score:String ):void {
+        private function updateScore( score:String ):void {
             font.setText( score, 922, 91 );
         }
 
         override public function revive():void {
             callAll( "revive" );
             super.revive();
+        }
+
+        public function updateGenerator():void {
+            if ( calculator.updated() ) {
+                updateScore( calculator.getCalculatorResult().toString() );
+            }
         }
     }
 }

@@ -2,14 +2,9 @@ package {
 
     import com.sixfootsoftware.pitstop.Border;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
-    import com.sixfootsoftware.pitstop.ComponentRegistry;
-    import com.sixfootsoftware.pitstop.ComponentRegistry;
-    import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
     import com.sixfootsoftware.pitstop.PitCar;
     import com.sixfootsoftware.pitstop.SpriteRegistry;
-
-    import flash.system.System;
 
     import org.flixel.*;
 
@@ -20,12 +15,11 @@ package {
 
         override public function create():void {
             var backdrop:GeneratedBackground = new GeneratedBackground(1, 1);
+
+            configureComponents();
+
             add(backdrop.getFlxSprite());
             add(ComponentRegistry.splashScreen);
-            //game stuff
-            ComponentRegistry.gameOver.setStopWatch(ComponentRegistry.stopWatch);
-            ComponentRegistry.stopWatchDisplay.setStopWatch(ComponentRegistry.stopWatch);
-            ComponentRegistry.playerControl.setPitGridCar(SpriteRegistry.grid.getPitPlacement() as PitCar );
             add(ComponentRegistry.gameOver);
             add(ComponentRegistry.pitstopText);
             add(ComponentRegistry.scoreText);
@@ -37,6 +31,14 @@ package {
             add(SpriteRegistry.grid);
 
             add(new Border());
+        }
+
+        private function configureComponents():void {
+            ComponentRegistry.gameOver.setStopWatch(ComponentRegistry.stopWatch);
+            ComponentRegistry.stopWatchDisplay.setStopWatch(ComponentRegistry.stopWatch);
+            ComponentRegistry.playerControl.setPitGridCar(SpriteRegistry.grid.getPitPlacement() as PitCar );
+            ComponentRegistry.pitstopTextGenerator.setPitstopCalculator( ComponentRegistry.pitstopCalculator );
+            ComponentRegistry.scoreTextGenerator.setScoreCalculator( ComponentRegistry.scoreCalculator );
         }
 
         override public function update():void {

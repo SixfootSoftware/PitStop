@@ -11,6 +11,8 @@ import com.sixfootsoftware.engine.SplashScreen;
         public static var scoreTextGenerator:ScoreTextGenerator = new ScoreTextGenerator();
         public static var stopWatchDisplay:StopWatchDisplay = new StopWatchDisplay();
         public static var playerControl:PlayerControl = new PlayerControl();
+        public static var pitstopCalculator:PlayerPitstopCalculator = new PlayerPitstopCalculator();
+        public static var scoreCalculator:PlayerScoreCalculator = new PlayerScoreCalculator();
 
         private static var splash:SplashScreen;
 
