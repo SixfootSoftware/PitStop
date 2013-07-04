@@ -33,6 +33,11 @@ package com.sixfootsoftware.pitstop {
             super.revive();
         }
 
+        override public function preUpdate():void {
+            super.preUpdate();
+            updateGenerator();
+        }
+
         public function updateGenerator():void {
             if ( calculator.updated() ) {
                 updateScore( calculator.getCalculatorResult().toString() );

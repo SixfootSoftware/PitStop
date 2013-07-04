@@ -28,6 +28,9 @@ package com.sixfootsoftware.pitstop {
         }
 
         public function updatePitTime( time:String ):void {
+            if ( time.length < 3 ) {
+                time = zeroPad( time, 3 );
+            }
             font.setText( time, 619, 91 );
         }
 
@@ -36,10 +39,21 @@ package com.sixfootsoftware.pitstop {
             super.revive();
         }
 
+        override public function preUpdate():void {
+            super.preUpdate();
+            updateGenerator();
+        }
+
         public function updateGenerator():void {
             if ( calculator.updated() ) {
                 updatePitTime( calculator.getCalculatorResult().toString() );
             }
+        }
+
+        private function zeroPad(str:String, width:int):String {
+            while( str.length < width )
+                str="0" + str;
+            return str;
         }
     }
 }

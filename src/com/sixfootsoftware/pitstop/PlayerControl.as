@@ -77,6 +77,7 @@ package com.sixfootsoftware.pitstop {
             if (!pitStarted) {
                 pitStarted = true;
                 pitStart = timer;
+                elapsed = 0;
             } else {
                 elapsed = timer - pitStart;
             }
@@ -85,7 +86,6 @@ package com.sixfootsoftware.pitstop {
         private function release():void {
             pitStarted = false;
             calculateScore(elapsed);
-            elapsed = 0;
             car.release();
         }
 
@@ -112,7 +112,7 @@ package com.sixfootsoftware.pitstop {
         }
 
         private function calculateScore( score:Number ):void {
-                ComponentRegistry.scoreCalculator.addScore( score );
+            ComponentRegistry.scoreCalculator.addScore( score );
         }
     }
 }

@@ -2,12 +2,11 @@
 package com.sixfootsoftware.pitstop {
     public class PlayerPitstopCalculator implements Calculator {
 	
-		private const PITSTOP_MULTIPLIER:uint = 100;
         private var pitstop:Number = 0;
         private var lastPitstop:Number = 0;
 
         public function calculatePitstop( elapsed:Number ):void {
-			pitstop = int( elapsed * PITSTOP_MULTIPLIER ); 			
+			pitstop = int( elapsed / 10 );
         }
 
         public function getCalculatorResult():Number {
