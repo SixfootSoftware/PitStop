@@ -31,6 +31,9 @@ package com.sixfootsoftware.pitstop {
             if ( time.length < 3 ) {
                 time = zeroPad( time, 3 );
             }
+            if ( time.length > 6 ) {
+                time = time.substr( 0, 6 );
+            }
             font.setText( time, 619, 91 );
         }
 

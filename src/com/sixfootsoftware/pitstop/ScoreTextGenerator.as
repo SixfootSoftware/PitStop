@@ -25,6 +25,9 @@ package com.sixfootsoftware.pitstop {
         }
 
         private function updateScore( score:String ):void {
+            if ( score.length > 6 ) {
+                score = score.substr( 0, 6 );
+            }
             font.setText( score, 922, 91 );
         }
 

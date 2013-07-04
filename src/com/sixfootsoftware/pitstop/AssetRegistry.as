@@ -20,6 +20,8 @@ package com.sixfootsoftware.pitstop {
         public static var Arrows:Class;
         [Embed(source="../../../assets/BleepBlopLo.mp3")]
         public static var SoundBleep:Class;
+        [Embed(source="../../../assets/BleepBlopHi.mp3")]
+        public static var SoundBlip:Class;
         [Embed(source="../../../assets/numbers.png")]
         public static var font:Class;
         [Embed(source="../../../assets/dot.png")]

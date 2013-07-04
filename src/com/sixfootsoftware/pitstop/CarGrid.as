@@ -53,8 +53,21 @@ package com.sixfootsoftware.pitstop {
 
         private function spawnCar():Boolean {
             if (!carList[0].isOccupied()) {
-                carList[0].setOccupied(int(Math.random() * 60) > 40);
+                if ( !gridOccupied() ) {
+                    carList[0].setOccupied(true);
+                } else {
+                    carList[0].setOccupied(int(Math.random() * 60) > 40);
+                }
                 return carList[0].isOccupied();
+            }
+            return false;
+        }
+
+        private function gridOccupied():Boolean {
+            for each( var car:Car in carList ) {
+                if ( car.isOccupied() ) {
+                    return true;
+                }
             }
             return false;
         }

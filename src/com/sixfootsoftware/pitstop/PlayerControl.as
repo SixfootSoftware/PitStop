@@ -11,6 +11,7 @@ package com.sixfootsoftware.pitstop {
     import org.flixel.FlxG;
     import org.flixel.FlxGroup;
     import org.flixel.FlxPoint;
+    import org.flixel.FlxSound;
 
     public class PlayerControl extends FlxGroup {
 
@@ -22,10 +23,13 @@ package com.sixfootsoftware.pitstop {
         private var pitStarted:Boolean = false;
         private var elapsed:Number;
         private var timer:Number;
+        private var stopped:Boolean = true;
+        private var sound:FlxSound = new FlxSound();
 
         public function PlayerControl() {
             add(leftArrowDisplay);
             add(rightArrowDisplay);
+            sound.loadEmbedded( AssetRegistry.SoundBlip, false, false );
             kill();
         }
 
@@ -52,12 +56,13 @@ package com.sixfootsoftware.pitstop {
         }
 
         override public function revive():void {
+            stopped = false;
             callAll("revive");
             super.revive();
         }
 
         public function checkPlayerPressed():void {
-            if (this.car.isOccupied()) {
+            if (this.car.isOccupied() && !stopped) {
                 timePitEvent();
                 if (!car.isWheelOff() && isLoosenWheelPressed()) {
                     car.loosenWheel();
@@ -73,8 +78,12 @@ package com.sixfootsoftware.pitstop {
         }
 
         private function timePitEvent():void {
+            if( car.isWheelDone() ) {
+                return;
+            }
             timer = getTimer();
             if (!pitStarted) {
+                sound.play();
                 pitStarted = true;
                 pitStart = timer;
                 elapsed = 0;
@@ -84,9 +93,12 @@ package com.sixfootsoftware.pitstop {
         }
 
         private function release():void {
-            pitStarted = false;
-            calculateScore(elapsed);
-            car.release();
+            if ( pitStarted ) {
+                sound.play();
+                pitStarted = false;
+                calculateScore(elapsed);
+                car.release();
+            }
         }
 
         private function isLoosenWheelPressed():Boolean {
@@ -105,6 +117,7 @@ package com.sixfootsoftware.pitstop {
 
         public function stop():void {
             leftArrowDisplay.playingAnimation = rightArrowDisplay.playingAnimation = alive = false;
+            stopped = true;
         }
 
         private function calculatePitstop( pitstop:Number ):void {

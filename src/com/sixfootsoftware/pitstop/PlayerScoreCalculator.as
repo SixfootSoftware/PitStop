@@ -1,5 +1,7 @@
 
 package com.sixfootsoftware.pitstop {
+    import org.flixel.FlxG;
+
     public class PlayerScoreCalculator implements Calculator {
 	
 		private const MAX_TIME:uint = 10000;
@@ -7,9 +9,12 @@ package com.sixfootsoftware.pitstop {
         private var lastScore:Number = 0;
 
         public function addScore( pitTime:Number ):void {
-			var time:int = MAX_TIME - pitTime;
+			var time:int = ( MAX_TIME - pitTime ) / 10;
 			if ( time > 0 ) {  
-				this.score += int( time );
+				this.score += time;
+                FlxG.log( "score =" + score );
+                FlxG.log( "time =" + time );
+
 			}				
         }
 
