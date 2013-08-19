@@ -1,5 +1,6 @@
 package {
 
+    import com.sixfootsoftware.hiScore.HiScoreGenerator;
     import com.sixfootsoftware.pitstop.Border;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
@@ -67,6 +68,9 @@ package {
             ComponentRegistry.playerControl.revive();
             SpriteRegistry.backgroundCarGrid.revive();
             SpriteRegistry.grid.revive();
+            //var hiscore:HiScoreGenerator = new HiScoreGenerator( HiScoreGenerator.SECRET );
+            //var score:int =  123;
+            //hiscore.setScore( score.toString() ).setUser( "123" );
         }
 
         private function stopGame():void {

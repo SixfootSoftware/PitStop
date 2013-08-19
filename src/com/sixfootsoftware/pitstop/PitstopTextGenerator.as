@@ -1,6 +1,7 @@
 
 package com.sixfootsoftware.pitstop {
     import com.sixfootsoftware.engine.BitmapFont;
+    import com.sixfootsoftware.engine.utils.StringOperations;
 
     import org.flixel.FlxGroup;
     import org.flixel.FlxSprite;
@@ -29,7 +30,7 @@ package com.sixfootsoftware.pitstop {
 
         public function updatePitTime( time:String ):void {
             if ( time.length < 3 ) {
-                time = zeroPad( time, 3 );
+                time = StringOperations.zeroPad( time, 3 );
             }
             if ( time.length > 6 ) {
                 time = time.substr( 0, 6 );
@@ -53,10 +54,5 @@ package com.sixfootsoftware.pitstop {
             }
         }
 
-        private function zeroPad(str:String, width:int):String {
-            while( str.length < width )
-                str="0" + str;
-            return str;
-        }
     }
 }
