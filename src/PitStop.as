@@ -14,7 +14,7 @@ import org.flixel.*;
         public static const GAME_Y_MIDDLE:int = GAME_HEIGHT / 2;
 
         public function PitStop() {
-            super( GAME_WIDTH, GAME_HEIGHT, PlayState, 1, 60, 60, true );
+            super( GAME_WIDTH, GAME_HEIGHT, MenuState, 1, 60, 60, true );
         }
 
     }

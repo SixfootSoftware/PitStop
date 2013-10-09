@@ -13,6 +13,7 @@ import com.sixfootsoftware.engine.SplashScreen;
         public static var playerControl:PlayerControl = new PlayerControl();
         public static var pitstopCalculator:PlayerPitstopCalculator = new PlayerPitstopCalculator();
         public static var scoreCalculator:PlayerScoreCalculator = new PlayerScoreCalculator();
+        public static var demoControl:DemoControl = new DemoControl() ;
 
         private static var splash:SplashScreen;
 
