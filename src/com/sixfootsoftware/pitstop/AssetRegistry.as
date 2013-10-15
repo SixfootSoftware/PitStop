@@ -26,5 +26,10 @@ package com.sixfootsoftware.pitstop {
         public static var font:Class;
         [Embed(source="../../../assets/dot.png")]
         public static var dot:Class;
+        [Embed(source='../../../assets/menu_newGame.png')]
+        public static var Menu_NewGame:Class;
+        [Embed(source='../../../assets/menu_newGame_hover.png')]
+        public static var Menu_NewGame_Hover:Class;
+
     }
 }

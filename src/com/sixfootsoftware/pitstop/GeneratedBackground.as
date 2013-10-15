@@ -11,10 +11,10 @@ public class GeneratedBackground {
 
         private var backdrop:BitmapData;
 
-        public function GeneratedBackground( xScale:Number, yScale:Number ) {
+        public function GeneratedBackground( xScale:Number, yScale:Number, bgWidth:int = PitStop.GAME_WIDTH, bgHeight:int = PitStop.GAME_HEIGHT ) {
             var seed:int = int( Math.random() * int.MAX_VALUE );
-            var width:int = PitStop.GAME_WIDTH / xScale;
-            var height:int = PitStop.GAME_HEIGHT / yScale;
+            var width:int = bgWidth / xScale;
+            var height:int = bgHeight / yScale;
             backdrop = new BitmapData( width, height, false, 0x9E9F8D );
             var colouriser:BitmapData = new BitmapData( width, height, false, 0x9E9F8D );
             backdrop.noise( seed, 0x87, 0x91, BitmapDataChannel.RED, true );

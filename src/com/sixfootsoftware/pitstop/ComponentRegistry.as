@@ -3,17 +3,17 @@ import com.sixfootsoftware.engine.SixfootSoftwareSplashScreenLogo;
 import com.sixfootsoftware.engine.SplashScreen;
 
     public class ComponentRegistry {
-        public static var stopWatch:StopWatchTimer = new StopWatchTimer();
-        public static var gameOver:GameOver = new GameOver();
-        public static var pitstopText:PitstopText = new PitstopText();
-        public static var pitstopTextGenerator:PitstopTextGenerator = new PitstopTextGenerator();
-        public static var scoreText:ScoreText = new ScoreText();
-        public static var scoreTextGenerator:ScoreTextGenerator = new ScoreTextGenerator();
-        public static var stopWatchDisplay:StopWatchDisplay = new StopWatchDisplay();
-        public static var playerControl:PlayerControl = new PlayerControl();
-        public static var pitstopCalculator:PlayerPitstopCalculator = new PlayerPitstopCalculator();
-        public static var scoreCalculator:PlayerScoreCalculator = new PlayerScoreCalculator();
-        public static var demoControl:DemoControl = new DemoControl() ;
+        public static var stopWatch:StopWatchTimer;
+        public static var gameOver:GameOver;
+        public static var pitstopText:PitstopText;
+        public static var pitstopTextGenerator:PitstopTextGenerator;
+        public static var scoreText:ScoreText;
+        public static var scoreTextGenerator:ScoreTextGenerator;
+        public static var stopWatchDisplay:StopWatchDisplay;
+        public static var playerControl:PlayerControl;
+        public static var pitstopCalculator:PlayerPitstopCalculator;
+        public static var scoreCalculator:PlayerScoreCalculator;
+        public static var demoControl:DemoControl;
 
         private static var splash:SplashScreen;
 
@@ -28,5 +28,18 @@ import com.sixfootsoftware.engine.SplashScreen;
             return splash;
         }
 
+        public static function reset():void {
+            stopWatch = new StopWatchTimer();
+            gameOver = new GameOver();
+            pitstopText = new PitstopText();
+            pitstopTextGenerator = new PitstopTextGenerator();
+            scoreText = new ScoreText();
+            scoreTextGenerator = new ScoreTextGenerator();
+            stopWatchDisplay = new StopWatchDisplay();
+            playerControl = new PlayerControl();
+            pitstopCalculator = new PlayerPitstopCalculator();
+            scoreCalculator = new PlayerScoreCalculator();
+            demoControl = new DemoControl() ;
+        }
     }
 }

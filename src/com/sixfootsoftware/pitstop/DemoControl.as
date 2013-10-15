@@ -9,20 +9,17 @@ package com.sixfootsoftware.pitstop {
     import com.sixfootsoftware.engine.RefreshTimer;
 
     import org.flixel.FlxGroup;
-    import org.flixel.FlxSound;
 
     public class DemoControl extends FlxGroup {
 
         private var car:PitCar;
         private var leftArrowDisplay:LeftArrowDisplay = new LeftArrowDisplay();
         private var rightArrowDisplay:RightArrowDisplay = new RightArrowDisplay();
-        private var sound:FlxSound = new FlxSound();
         private var refreshTimer:RefreshTimer = new RefreshTimer(500, 500);
 
         public function DemoControl() {
             add(leftArrowDisplay);
             add(rightArrowDisplay);
-            sound.loadEmbedded( AssetRegistry.SoundBlip, false, false );
             kill();
         }
 

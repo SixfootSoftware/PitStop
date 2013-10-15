@@ -12,6 +12,8 @@ package com.sixfootsoftware.pitstop {
         private var carList:Vector.<Car> = new Vector.<Car>(8);
         private var refreshTimer:RefreshTimer = new RefreshTimer(750, 150);
         private var sound:FlxSound = new FlxSound();
+        private var demo:Boolean = false;
+        public static const DEMO:Boolean = true;
 
         public function CarGrid() {
             buildGrid();
@@ -96,11 +98,17 @@ package com.sixfootsoftware.pitstop {
             return false;
         }
 
+        public function setMode( demo:Boolean ):void {
+            this.demo = demo;
+        }
+
         override public function preUpdate():void {
             super.preUpdate();
             if (alive && refreshTimer.isReadyForUpdate()) {
                 if ( rotateGrid() || spawnCar() ) {
-                    sound.play();
+                    if ( !demo ) {
+                        sound.play();
+                    }
                 }
             }
         }

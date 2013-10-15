@@ -5,13 +5,18 @@
  */
 package {
 
+    import com.sixfootsoftware.pitstop.AssetRegistry;
     import com.sixfootsoftware.pitstop.Border;
+    import com.sixfootsoftware.pitstop.CarGrid;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
     import com.sixfootsoftware.pitstop.PitCar;
     import com.sixfootsoftware.pitstop.SpriteRegistry;
 
     import org.flixel.*;
+    import org.flixel.plugin.photonstorm.FlxButtonPlus;
+
+
 
     public class MenuState extends FlxState {
 
@@ -20,6 +25,25 @@ package {
 
         override public function create():void {
             var backdrop:GeneratedBackground = new GeneratedBackground(1, 1);
+            ComponentRegistry.reset();
+            SpriteRegistry.reset();
+
+            //menu gen
+            var menuBg:GeneratedBackground = new GeneratedBackground(1, 1, 355, 462 );
+            var menuSprite:FlxSprite = menuBg.getFlxSprite()
+            menuSprite.drawLine( 0, 0, 355, 0, 0, 12 );
+            menuSprite.drawLine( 0, 0, 0, 462, 0, 12 );
+            menuSprite.drawLine( 355, 0, 355, 462, 0, 12 );
+            menuSprite.drawLine( 0, 462, 355, 462, 0, 12 );
+            menuSprite.x =  PitStop.GAME_X_MIDDLE - ( 355 / 2 );
+            menuSprite.y =  PitStop.GAME_Y_MIDDLE - ( 462 / 2 );
+            menuSprite.alpha = 0.95;
+            var startGame:FlxButtonPlus = new FlxButtonPlus( PitStop.GAME_X_MIDDLE - ( 288 / 2 ), 85, onClickStart );
+            var start:FlxSprite = new FlxSprite();
+            var hover:FlxSprite = new FlxSprite();
+
+            startGame.loadGraphic( start.loadGraphic( AssetRegistry.Menu_NewGame, false, false )
+                                 , hover.loadGraphic( AssetRegistry.Menu_NewGame_Hover, false, false ) );
 
             configureComponents();
 
@@ -33,8 +57,16 @@ package {
             add(ComponentRegistry.demoControl);
             add(SpriteRegistry.backgroundCarGrid);
             add(SpriteRegistry.grid);
+            SpriteRegistry.grid.setMode( CarGrid.DEMO );
+            add(menuSprite);
+            add(startGame);
 
             add(new Border());
+        }
+
+        private function onClickStart():void {
+            FlxG.switchState( new PlayState() );
+            return;
         }
 
         private function configureComponents():void {

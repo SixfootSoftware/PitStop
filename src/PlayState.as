@@ -1,7 +1,9 @@
 package {
 
+    import com.sixfootsoftware.engine.RefreshTimer;
     import com.sixfootsoftware.hiScore.HiScoreGenerator;
     import com.sixfootsoftware.pitstop.Border;
+    import com.sixfootsoftware.pitstop.CarGrid;
     import com.sixfootsoftware.pitstop.ComponentRegistry;
     import com.sixfootsoftware.pitstop.GeneratedBackground;
     import com.sixfootsoftware.pitstop.PitCar;
@@ -10,17 +12,16 @@ package {
     import org.flixel.*;
 
     public class PlayState extends FlxState {
-
-        public function PlayState() {
-        }
+        private var stopTimer:RefreshTimer;
 
         override public function create():void {
             var backdrop:GeneratedBackground = new GeneratedBackground(1, 1);
+            ComponentRegistry.reset();
+            SpriteRegistry.reset();
 
             configureComponents();
 
             add(backdrop.getFlxSprite());
-            add(ComponentRegistry.splashScreen);
             add(ComponentRegistry.gameOver);
             add(ComponentRegistry.pitstopText);
             add(ComponentRegistry.scoreText);
@@ -30,6 +31,7 @@ package {
             add(ComponentRegistry.playerControl);
             add(SpriteRegistry.backgroundCarGrid);
             add(SpriteRegistry.grid);
+            SpriteRegistry.grid.setMode( !CarGrid.DEMO );
 
             add(new Border());
         }
@@ -43,7 +45,7 @@ package {
         }
 
         override public function update():void {
-            if (!ComponentRegistry.gameOver.alive && !ComponentRegistry.splashScreen.alive) {
+            if (!ComponentRegistry.gameOver.alive) {
                 prepareStartOfGame();
             }
             if (ComponentRegistry.gameOver.isGameRunning()) {
@@ -52,9 +54,17 @@ package {
                 ComponentRegistry.playerControl.checkPlayerPressed();
                 if ( ComponentRegistry.stopWatch.hasTimedOut() ) {
                     stopGame();
+                    if ( stopTimer == null ) {
+                        stopTimer = new RefreshTimer( 10000, 10000 );
+                    } else {
+                        if ( stopTimer.isReadyForUpdate() ) {
+                            FlxG.switchState( new MenuState() );
+                            return;
+                        }
+                    }
                 }
-
             }
+            //wait for timeout, send scores to site and reload menu
             super.update();
         }
 
